@@ -17,7 +17,7 @@ Visual Studio Code est recommandé : le fichier `.vscode/launch.json` fournit le
 ## Installation
 
 ```bash
-git clone https://github.com/kasa-demo/kasa-app.git
+git clone https://github.com/OpenClassrooms-Student-Center/Starter-P7-option-full-js-dfs-Front-end-avanc-.git kasa-app
 cd kasa-app
 nvm use
 npm install
