@@ -2,10 +2,6 @@ import { readFile } from 'node:fs/promises';
 
 const SEPARATEUR = ',';
 
-/**
- * Découpe une ligne du CSV en valeurs. Le fichier de données n'utilise ni guillemets
- * ni virgules dans ses valeurs : un découpage simple suffit.
- */
 function decouperLigne(ligne) {
   return ligne.split(SEPARATEUR).map((valeur) => valeur.trim());
 }
@@ -34,10 +30,21 @@ function versLogement(enregistrement) {
   };
 }
 
+function versSejour(enregistrement) {
+  return {
+    id: enregistrement.id,
+    idVoyageur: enregistrement.id_voyageur,
+    idLogement: enregistrement.id_logement,
+    dateArrivee: enregistrement.date_arrivee,
+    nombreNuits: Number(enregistrement.nombre_nuits),
+    statut: enregistrement.statut_sejour,
+    prixTotal: Number(enregistrement.prix_total),
+  };
+}
+
 /**
- * Transforme le contenu texte du CSV en deux listes : utilisateurs et logements.
- * La première ligne est l'en-tête ; la colonne type_enregistrement indique la nature
- * de chaque ligne. Les lignes vides sont ignorées.
+ * Transforme le CSV en collections d'utilisateurs, de logements et de séjours.
+ * Le type d'enregistrement détermine les colonnes à lire pour chaque ligne.
  */
 export function parserCsv(texte) {
   const lignes = texte
@@ -46,34 +53,35 @@ export function parserCsv(texte) {
     .filter((ligne) => ligne.trim() !== '');
 
   if (lignes.length === 0) {
-    return { utilisateurs: [], logements: [] };
+    return { utilisateurs: [], logements: [], sejours: [] };
   }
 
   const entetes = decouperLigne(lignes[0]);
   const utilisateurs = [];
   const logements = [];
+  const sejours = [];
 
   for (const ligne of lignes.slice(1)) {
     const valeurs = decouperLigne(ligne);
     const enregistrement = {};
-    entetes.forEach((cle, index) => {
-      enregistrement[cle] = valeurs[index] ?? '';
+
+    entetes.forEach((entete, index) => {
+      enregistrement[entete] = valeurs[index] ?? '';
     });
 
     if (enregistrement.type_enregistrement === 'utilisateur') {
       utilisateurs.push(versUtilisateur(enregistrement));
     } else if (enregistrement.type_enregistrement === 'logement') {
       logements.push(versLogement(enregistrement));
+    } else if (enregistrement.type_enregistrement === 'sejour') {
+      sejours.push(versSejour(enregistrement));
     }
   }
 
-  return { utilisateurs, logements };
+  return { utilisateurs, logements, sejours };
 }
 
-/**
- * Lit le fichier CSV sur le disque et renvoie les données parsées.
- */
 export async function chargerDonnees(cheminFichier) {
-  const texte = await readFile(cheminFichier, 'utf8');
-  return parserCsv(texte);
+  const contenu = await readFile(cheminFichier, 'utf8');
+  return parserCsv(contenu);
 }

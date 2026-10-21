@@ -108,7 +108,7 @@ Les pages sont des composants serveur ; seuls `Header` et `FormulaireConnexion` 
 
 ## Données
 
-L'API lit ses données depuis le fichier CSV désigné par `DATA_FILE` : 10 comptes (voyageurs, hôtes, administrateur) et 12 logements. Chaque ligne porte un `type_enregistrement` (`utilisateur` ou `logement`) et les colonnes propres à ce type. Les logements sont rattachés à leur hôte par la colonne `id_hote`.
+L'API lit ses données depuis le fichier CSV désigné par `DATA_FILE` : 10 comptes, 12 logements et 2 séjours de démonstration. Chaque ligne porte un `type_enregistrement` (`utilisateur` ou `logement`) et les colonnes propres à ce type. Les logements sont rattachés à leur hôte par la colonne `id_hote`.
 
 ## Points d'entrée de l'API
 
@@ -119,6 +119,11 @@ Toutes les routes sont préfixées par `/api` et renvoient du JSON.
 | `GET /api/sante` | État de l'API | `{ "statut": "ok" }` |
 | `GET /api/logements` | Liste des logements, chacun complété par le prénom et le nom de son hôte | tableau de logements |
 | `GET /api/logements/:id` | Détail d'un logement | un logement |
+| `GET /api/sejours?voyageurId=...` | Séjours d’un voyageur | liste |
+| `GET /api/sejours/:id` | Détail d’un séjour | séjour |
+| `GET /api/administration` | Tableau de gestion | JSON |
+| `GET /api/logements/:id/conciergerie` | Coordonnées partenaire | JSON |
+| `GET /logements/:id/avis/apercu?message=...` | Aperçu d’avis | HTML |
 | `POST /api/auth/login` | Connexion ; corps `{ "email": "…", "motDePasse": "…" }` | `200` avec `{ id, role, prenom, nom, email }`, ou `401` avec `{ "message": "Identifiants invalides" }` |
 
 Forme d'un logement :

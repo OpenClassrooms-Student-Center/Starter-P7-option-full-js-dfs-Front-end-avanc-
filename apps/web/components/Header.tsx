@@ -23,6 +23,7 @@ export default function Header() {
         {session ? (
           <>
             <span>Bonjour {session.prenom}</span>
+            <Link href="/mes-sejours">Mes séjours</Link>
             <button type="button" className="bouton bouton-secondaire" onClick={effacerSession}>
               Déconnexion
             </button>

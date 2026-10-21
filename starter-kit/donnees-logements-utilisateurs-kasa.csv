@@ -21,3 +21,5 @@ logement,l-009,T3 proche gare Saint-Jean,appartement,Bordeaux,95,u-002,,,,,,2026
 logement,l-010,Maison de ville avec terrasse,maison,Toulouse,150,u-003,,,,,,2026-01-18
 logement,l-011,Studio étudiant cosy,appartement,Lille,62,u-004,,,,,,2026-01-18
 logement,l-012,Gîte en pleine campagne,maison,Sarlat-la-Canéda,105,u-005,,,,,,2026-01-20
+sejour,sejour-001,,,,,,,,,,,,u-006,l-001,2026-11-12,4,confirmee,356
+sejour,sejour-002,,,,,,,,,,,,u-007,l-004,2026-12-03,3,confirmee,780

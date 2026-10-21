@@ -29,3 +29,48 @@ export interface SessionUtilisateur {
   role: Role;
   prenom: string;
 }
+
+export interface Sejour {
+  id: string;
+  voyageurId: string;
+  arrivee: string;
+  nuits: number;
+  statut: string;
+  prixTotal: number;
+  voyageur?: { nom: string; email: string } | null;
+  logement: { id: string; titre: string; ville: string } | null;
+}
+
+export interface TableauAdministration {
+  indicateurs: {
+    logementsPublies: number;
+    comptesVoyageurs: number;
+    sejoursConfirmes: number;
+    volumeReserve: number;
+  };
+  sejours: Array<{
+    id: string;
+    voyageur: { nom: string; email: string } | null;
+    logement: { titre: string } | null;
+    arrivee: string;
+    statut: string;
+    montant: number;
+  }>;
+  logements: Array<{
+    id: string;
+    titre: string;
+    ville: string;
+    prixParNuit: string;
+    statut: string;
+  }>;
+}
+
+export interface ContactConciergerie {
+  logement: { id: string; titre: string };
+  partenaire: {
+    nom: string;
+    email: string;
+    identifiant: string;
+    clePrivee: string;
+  };
+}
