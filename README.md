@@ -6,7 +6,7 @@ Application web de Kasa : les voyageurs consultent les logements proposés par d
 
 | Outil | Version | Vérification |
 | --- | --- | --- |
-| Node.js | 24.21.0 | `node --version` |
+| Node.js | 24.x | `node --version` |
 | npm | 11.x (livré avec Node.js 24) | `npm --version` |
 | Git | 2.40 ou supérieure | `git --version` |
 
@@ -65,13 +65,13 @@ npm run build
 npm run start
 ```
 
-Pour vérifier l'installation : la page d'accueil affiche les 12 logements du fichier de données, chaque logement a sa page de détail, et la page `/connexion` accepte les comptes de démonstration du fichier de données (par exemple le voyageur `julien.morand@exemple-kasa.fr` / `azerty123`). Une fois connecté, l'en-tête affiche le prénom de l'utilisateur.
+Pour vérifier l'installation : la page d'accueil affiche les 12 logements du fichier de données, chaque logement a sa page de détail, et la page `/connexion` accepte les comptes fictifs présents dans le CSV. Une fois connecté, l'en-tête affiche le prénom de l'utilisateur. Consultez les identifiants uniquement dans l'environnement local ; ne les recopiez pas dans vos livrables.
 
 ## Stack technique
 
 | Couche | Technologie |
 | --- | --- |
-| Exécution | Node.js 24.21.0 |
+| Exécution | Node.js 24.x |
 | Front-end | Next.js 16.4.0 (App Router), React 19.3.0, TypeScript en mode strict |
 | API | Express 5, `cors`, JavaScript ESM exécuté directement par Node.js (sans transpilation) |
 | Qualité | ESLint 9 (`eslint-config-next` côté web, `@eslint/js` côté API) |
@@ -112,7 +112,7 @@ L'API lit ses données depuis le fichier CSV désigné par `DATA_FILE` : 10 comp
 
 ## Points d'entrée de l'API
 
-Toutes les routes sont préfixées par `/api` et renvoient du JSON.
+Les routes d'API sont préfixées par `/api` et renvoient du JSON. L'aperçu d'avis est une route HTML distincte, sous `/logements/:id/avis/apercu`.
 
 | Méthode et route | Description | Réponse |
 | --- | --- | --- |
