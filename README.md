@@ -1,4 +1,4 @@
-# kasa-app — plateforme de réservation de logements entre particuliers
+# Kasa
 
 Application web de Kasa : les voyageurs consultent les logements proposés par des hôtes particuliers et se connectent à leur compte. Le dépôt regroupe le front-end Next.js / React et l'API Node.js qui l'alimente, organisés en espaces de travail npm (*workspaces*) : une seule installation à la racine suffit.
 
